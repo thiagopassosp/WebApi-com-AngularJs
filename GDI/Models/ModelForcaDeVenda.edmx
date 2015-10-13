@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BD_FORCA_VENDASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="idcliente" />
+          </Key>
+          <Property Name="idcliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="100" />
+          <Property Name="cpf_cnpj" Type="varchar" MaxLength="18" />
+          <Property Name="endereco" Type="varchar" MaxLength="200" />
+          <Property Name="bairro" Type="varchar" MaxLength="40" />
+          <Property Name="cidade" Type="varchar" MaxLength="40" />
+          <Property Name="cep" Type="varchar" MaxLength="10" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="telefone" Type="varchar" MaxLength="15" />
+          <Property Name="status_cliente" Type="varchar" MaxLength="20" />
+          <Property Name="data_cadastro" Type="date" />
+        </EntityType>
+        <EntityType Name="pedido_cabecalho">
+          <Key>
+            <PropertyRef Name="idpedido_cabecalho" />
+          </Key>
+          <Property Name="idpedido_cabecalho" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idcliente" Type="int" Nullable="false" />
+          <Property Name="valor_total_pedido" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="qtde_itens" Type="int" />
+          <Property Name="status_pedido" Type="varchar" MaxLength="20" />
+          <Property Name="data_pedido" Type="date" />
+        </EntityType>
+        <EntityType Name="pedido_itens">
+          <Key>
+            <PropertyRef Name="idpedido_itens" />
+          </Key>
+          <Property Name="idpedido_itens" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idpedido_cabecalho" Type="int" Nullable="false" />
+          <Property Name="idproduto" Type="int" Nullable="false" />
+          <Property Name="quantidade" Type="int" />
+          <Property Name="valor_unitario" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="sub_total" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="status_item" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="produto">
+          <Key>
+            <PropertyRef Name="idproduto" />
+          </Key>
+          <Property Name="idproduto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descricao" Type="varchar" MaxLength="100" />
+          <Property Name="preco_compra" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="preco_venda" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="qtde_estoque" Type="int" />
+          <Property Name="data_cadastro" Type="date" />
+          <Property Name="status_produto" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__pedido_ca__idcli__0CBAE877">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+          <End Role="pedido_cabecalho" Type="Self.pedido_cabecalho" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="idcliente" />
+            </Principal>
+            <Dependent Role="pedido_cabecalho">
+              <PropertyRef Name="idcliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__pedido_it__idped__117F9D94">
+          <End Role="pedido_cabecalho" Type="Self.pedido_cabecalho" Multiplicity="1" />
+          <End Role="pedido_itens" Type="Self.pedido_itens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pedido_cabecalho">
+              <PropertyRef Name="idpedido_cabecalho" />
+            </Principal>
+            <Dependent Role="pedido_itens">
+              <PropertyRef Name="idpedido_cabecalho" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__pedido_it__idpro__1273C1CD">
+          <End Role="produto" Type="Self.produto" Multiplicity="1" />
+          <End Role="pedido_itens" Type="Self.pedido_itens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="produto">
+              <PropertyRef Name="idproduto" />
+            </Principal>
+            <Dependent Role="pedido_itens">
+              <PropertyRef Name="idproduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BD_FORCA_VENDASModelStoreContainer">
+          <EntitySet Name="cliente" EntityType="Self.cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pedido_cabecalho" EntityType="Self.pedido_cabecalho" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pedido_itens" EntityType="Self.pedido_itens" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="produto" EntityType="Self.produto" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__pedido_ca__idcli__0CBAE877" Association="Self.FK__pedido_ca__idcli__0CBAE877">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="pedido_cabecalho" EntitySet="pedido_cabecalho" />
+          </AssociationSet>
+          <AssociationSet Name="FK__pedido_it__idped__117F9D94" Association="Self.FK__pedido_it__idped__117F9D94">
+            <End Role="pedido_cabecalho" EntitySet="pedido_cabecalho" />
+            <End Role="pedido_itens" EntitySet="pedido_itens" />
+          </AssociationSet>
+          <AssociationSet Name="FK__pedido_it__idpro__1273C1CD" Association="Self.FK__pedido_it__idpro__1273C1CD">
+            <End Role="produto" EntitySet="produto" />
+            <End Role="pedido_itens" EntitySet="pedido_itens" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BD_FORCA_VENDASModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="idcliente" />
+          </Key>
+          <Property Name="idcliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="cpf_cnpj" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="endereco" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="bairro" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="cidade" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="cep" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telefone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="status_cliente" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="data_cadastro" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="pedido_cabecalho" Relationship="Self.FK__pedido_ca__idcli__0CBAE877" FromRole="cliente" ToRole="pedido_cabecalho" />
+        </EntityType>
+        <EntityType Name="pedido_cabecalho">
+          <Key>
+            <PropertyRef Name="idpedido_cabecalho" />
+          </Key>
+          <Property Name="idpedido_cabecalho" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idcliente" Type="Int32" Nullable="false" />
+          <Property Name="valor_total_pedido" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="qtde_itens" Type="Int32" />
+          <Property Name="status_pedido" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="data_pedido" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="cliente" Relationship="Self.FK__pedido_ca__idcli__0CBAE877" FromRole="pedido_cabecalho" ToRole="cliente" />
+          <NavigationProperty Name="pedido_itens" Relationship="Self.FK__pedido_it__idped__117F9D94" FromRole="pedido_cabecalho" ToRole="pedido_itens" />
+        </EntityType>
+        <EntityType Name="pedido_itens">
+          <Key>
+            <PropertyRef Name="idpedido_itens" />
+          </Key>
+          <Property Name="idpedido_itens" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idpedido_cabecalho" Type="Int32" Nullable="false" />
+          <Property Name="idproduto" Type="Int32" Nullable="false" />
+          <Property Name="quantidade" Type="Int32" />
+          <Property Name="valor_unitario" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="sub_total" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="status_item" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="pedido_cabecalho" Relationship="Self.FK__pedido_it__idped__117F9D94" FromRole="pedido_itens" ToRole="pedido_cabecalho" />
+          <NavigationProperty Name="produto" Relationship="Self.FK__pedido_it__idpro__1273C1CD" FromRole="pedido_itens" ToRole="produto" />
+        </EntityType>
+        <EntityType Name="produto">
+          <Key>
+            <PropertyRef Name="idproduto" />
+          </Key>
+          <Property Name="idproduto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descricao" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="preco_compra" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="preco_venda" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="qtde_estoque" Type="Int32" />
+          <Property Name="data_cadastro" Type="DateTime" Precision="0" />
+          <Property Name="status_produto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="pedido_itens" Relationship="Self.FK__pedido_it__idpro__1273C1CD" FromRole="produto" ToRole="pedido_itens" />
+        </EntityType>
+        <Association Name="FK__pedido_ca__idcli__0CBAE877">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="1" />
+          <End Role="pedido_cabecalho" Type="Self.pedido_cabecalho" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="idcliente" />
+            </Principal>
+            <Dependent Role="pedido_cabecalho">
+              <PropertyRef Name="idcliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__pedido_it__idped__117F9D94">
+          <End Role="pedido_cabecalho" Type="Self.pedido_cabecalho" Multiplicity="1" />
+          <End Role="pedido_itens" Type="Self.pedido_itens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pedido_cabecalho">
+              <PropertyRef Name="idpedido_cabecalho" />
+            </Principal>
+            <Dependent Role="pedido_itens">
+              <PropertyRef Name="idpedido_cabecalho" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__pedido_it__idpro__1273C1CD">
+          <End Role="produto" Type="Self.produto" Multiplicity="1" />
+          <End Role="pedido_itens" Type="Self.pedido_itens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="produto">
+              <PropertyRef Name="idproduto" />
+            </Principal>
+            <Dependent Role="pedido_itens">
+              <PropertyRef Name="idproduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BancoDadosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cliente" EntityType="Self.cliente" />
+          <EntitySet Name="pedido_cabecalho" EntityType="Self.pedido_cabecalho" />
+          <EntitySet Name="pedido_itens" EntityType="Self.pedido_itens" />
+          <EntitySet Name="produto" EntityType="Self.produto" />
+          <AssociationSet Name="FK__pedido_ca__idcli__0CBAE877" Association="Self.FK__pedido_ca__idcli__0CBAE877">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="pedido_cabecalho" EntitySet="pedido_cabecalho" />
+          </AssociationSet>
+          <AssociationSet Name="FK__pedido_it__idped__117F9D94" Association="Self.FK__pedido_it__idped__117F9D94">
+            <End Role="pedido_cabecalho" EntitySet="pedido_cabecalho" />
+            <End Role="pedido_itens" EntitySet="pedido_itens" />
+          </AssociationSet>
+          <AssociationSet Name="FK__pedido_it__idpro__1273C1CD" Association="Self.FK__pedido_it__idpro__1273C1CD">
+            <End Role="produto" EntitySet="produto" />
+            <End Role="pedido_itens" EntitySet="pedido_itens" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BD_FORCA_VENDASModelStoreContainer" CdmEntityContainer="BancoDadosEntities">
+          <EntitySetMapping Name="cliente">
+            <EntityTypeMapping TypeName="BD_FORCA_VENDASModel.cliente">
+              <MappingFragment StoreEntitySet="cliente">
+                <ScalarProperty Name="idcliente" ColumnName="idcliente" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="cpf_cnpj" ColumnName="cpf_cnpj" />
+                <ScalarProperty Name="endereco" ColumnName="endereco" />
+                <ScalarProperty Name="bairro" ColumnName="bairro" />
+                <ScalarProperty Name="cidade" ColumnName="cidade" />
+                <ScalarProperty Name="cep" ColumnName="cep" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="telefone" ColumnName="telefone" />
+                <ScalarProperty Name="status_cliente" ColumnName="status_cliente" />
+                <ScalarProperty Name="data_cadastro" ColumnName="data_cadastro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pedido_cabecalho">
+            <EntityTypeMapping TypeName="BD_FORCA_VENDASModel.pedido_cabecalho">
+              <MappingFragment StoreEntitySet="pedido_cabecalho">
+                <ScalarProperty Name="idpedido_cabecalho" ColumnName="idpedido_cabecalho" />
+                <ScalarProperty Name="idcliente" ColumnName="idcliente" />
+                <ScalarProperty Name="valor_total_pedido" ColumnName="valor_total_pedido" />
+                <ScalarProperty Name="qtde_itens" ColumnName="qtde_itens" />
+                <ScalarProperty Name="status_pedido" ColumnName="status_pedido" />
+                <ScalarProperty Name="data_pedido" ColumnName="data_pedido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pedido_itens">
+            <EntityTypeMapping TypeName="BD_FORCA_VENDASModel.pedido_itens">
+              <MappingFragment StoreEntitySet="pedido_itens">
+                <ScalarProperty Name="idpedido_itens" ColumnName="idpedido_itens" />
+                <ScalarProperty Name="idpedido_cabecalho" ColumnName="idpedido_cabecalho" />
+                <ScalarProperty Name="idproduto" ColumnName="idproduto" />
+                <ScalarProperty Name="quantidade" ColumnName="quantidade" />
+                <ScalarProperty Name="valor_unitario" ColumnName="valor_unitario" />
+                <ScalarProperty Name="sub_total" ColumnName="sub_total" />
+                <ScalarProperty Name="status_item" ColumnName="status_item" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="produto">
+            <EntityTypeMapping TypeName="BD_FORCA_VENDASModel.produto">
+              <MappingFragment StoreEntitySet="produto">
+                <ScalarProperty Name="idproduto" ColumnName="idproduto" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="preco_compra" ColumnName="preco_compra" />
+                <ScalarProperty Name="preco_venda" ColumnName="preco_venda" />
+                <ScalarProperty Name="qtde_estoque" ColumnName="qtde_estoque" />
+                <ScalarProperty Name="data_cadastro" ColumnName="data_cadastro" />
+                <ScalarProperty Name="status_produto" ColumnName="status_produto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

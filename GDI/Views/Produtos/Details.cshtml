@@ -1,0 +1,66 @@
+﻿@model GDI.Models.produto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>produto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.preco_compra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.preco_compra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.preco_venda)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.preco_venda)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.qtde_estoque)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.qtde_estoque)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.data_cadastro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.data_cadastro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.status_produto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status_produto)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idproduto }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

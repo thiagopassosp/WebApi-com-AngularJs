@@ -1,0 +1,58 @@
+﻿@model GDI.Models.pedido_cabecalho
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>pedido_cabecalho</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.valor_total_pedido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.valor_total_pedido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.qtde_itens)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.qtde_itens)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.status_pedido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status_pedido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.data_pedido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.data_pedido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cliente.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cliente.nome)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idpedido_cabecalho }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
