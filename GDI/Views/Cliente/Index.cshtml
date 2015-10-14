@@ -14,47 +14,47 @@
                             </div>
                             <label for="nome" class="col-sm-2 control-label">Nome:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="nome" data-ng-model="novocliente.nome" required />
+                                <input type="text" class="form-control" id="nome" data-ng-model="model.nome" required />
                             </div>
 
                             <label for="cpf" class="col-sm-2 control-label">CPF/CNPJ:</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" id="cpf_cnpj" data-ng-model="novocliente.cpf_cnpj" required />
-                            </div>
-
-                            <label for="endereco" class="col-sm-2 control-label">Endereço:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="endereco" data-ng-model="novocliente.endereco" required />
-                            </div>
-
-                            <label for="bairro" class="col-sm-2 control-label">Bairro:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="bairro" data-ng-model="novocliente.bairro" required />
-                            </div>
-
-                            <label for="cidade" class="col-sm-2 control-label">Cidade:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="cidade" data-ng-model="novocliente.cidade" required />
+                                <input type="number" class="form-control" id="cpf_cnpj" data-ng-model="model.cpf_cnpj" />
                             </div>
 
                             <label for="cep" class="col-sm-2 control-label">CEP:</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" id="cep" data-ng-model="novocliente.cep" required />
+                                <input type="number" class="form-control" id="cep" data-ng-model="model.cep" required />
+                            </div>
+
+                            <label for="endereco" class="col-sm-2 control-label">Endereço:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="endereco" data-ng-model="model.endereco" required />
+                            </div>
+
+                            <label for="bairro" class="col-sm-2 control-label">Bairro:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="bairro" data-ng-model="model.bairro" required />
+                            </div>
+
+                            <label for="cidade" class="col-sm-2 control-label">Cidade:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="cidade" data-ng-model="model.cidade" required />
                             </div>
 
                             <label for="email" class="col-sm-2 control-label">Email:</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="email" data-ng-model="novocliente.email" required />
+                                <input type="email" class="form-control" id="email" data-ng-model="model.email" required />
                             </div>
 
                             <label for="telefone" class="col-sm-2 control-label">Telefone:</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" id="telefone" data-ng-model="novocliente.telefone" required />
+                                <input type="number" class="form-control" id="telefone" data-ng-model="model.telefone" />
                             </div>
 
                             <label for="status" class="col-sm-2 control-label">Status:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="status_cliente" data-ng-model="novocliente.status_cliente" required />
+                                <input type="text" class="form-control" id="status_cliente" data-ng-model="model.status_cliente" required />
                             </div>
 
                             <div class="form-group">
@@ -73,37 +73,35 @@
                 <div class="col-md-12">
                     <div class="table-responsive" data-ng-hide="ocultaTabelaListagemClientes">
                         <p><a data-ng-click="funcformNovoCliente()" class="btn btn-primary">Novo cliente</a></p>
-                        <table class="table table-bordered table-hover">
+                        <table class="table table-bordered table-responsive table-hover">
                             <tr>
-                                <td>ID</td>
+                                <th>ID</th>
                                 <th>Nome</th>
                                 <th>CPF/CNPJ</th>
+                                <th>CEP</th>
                                 <th>Endereço</th>
                                 <th>Bairro</th>
                                 <th>Cidade</th>
-                                <th>CEP</th>
                                 <th>Email</th>
                                 <th>Telefone</th>
                                 <th>Status</th>
                                 <th>Data cadastro</th>
-                                <th></th>
+                                <th colspan="2" class="text-center">Ação</th>
                             </tr>
                             <tr data-ng-repeat="cliente in clientes">
                                 <td>{{ cliente.idcliente }}</td>
                                 <td>{{ cliente.nome }}</td>
                                 <td>{{ cliente.cpf_cnpj }}</td>
+                                <td>{{ cliente.cep }}</td>
                                 <td>{{ cliente.endereco }}</td>
                                 <td>{{ cliente.bairro }}</td>
                                 <td>{{ cliente.cidade }} </td>
-                                <td>{{ cliente.cep }}</td>
                                 <td>{{ cliente.email }} </td>
                                 <td>{{ cliente.telefone }}</td>
                                 <td>{{ cliente.status_cliente }} </td>
-                                <td>{{ cliente.data_cadastro }}</td>
-                                <td>
-                                    <a data-ng-click="funcformEditarCliente(cliente)" href="javascript:;">Editar</a>
-                                    | <a data-ng-click="deletarCliente(cliente)" href="javascript:;">Deletar</a>
-                                </td>
+                                <td>{{ cliente.data_cadastro | date:'dd/MM/yyyy' }}</td>
+                                <td><a data-ng-click="funcformEditarCliente(cliente)" href="javascript:;">Editar</a></td>
+                                <td><a data-ng-click="deletarCliente(cliente)" href="javascript:;">Deletar</a></td>
                             </tr>
                         </table>
                     </div><!--fim div class="table-responsive"-->
@@ -120,43 +118,43 @@
                             </div>
                             <label for="idcliente" class="col-sm-2 control-label">ID:</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" id="idcliente" data-ng-model="clienteAlterar.idcliente" required />
+                                <input type="number" class="form-control" id="idcliente" data-ng-model="model.idcliente" required />
                             </div>
                             <label for="nome" class="col-sm-2 control-label">Nome:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="nome" data-ng-model="clienteAlterar.nome" required />
+                                <input type="text" class="form-control" id="nome" data-ng-model="model.nome" required />
                             </div>
                             <label for="cpf" class="col-sm-2 control-label">CPF/CNPJ:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="cpf_cnpj" data-ng-model="clienteAlterar.cpf_cnpj" required />
-                            </div>
-                            <label for="endereco" class="col-sm-2 control-label">Endereço:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="endereco" data-ng-model="clienteAlterar.endereco" required />
-                            </div>
-                            <label for="bairro" class="col-sm-2 control-label">Bairro:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="bairro" data-ng-model="clienteAlterar.bairro" required />
-                            </div>
-                            <label for="cidade" class="col-sm-2 control-label">Cidade:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="cidade" data-ng-model="clienteAlterar.cidade" required />
+                                <input type="text" class="form-control" id="cpf_cnpj" data-ng-model="model.cpf_cnpj" required />
                             </div>
                             <label for="cep" class="col-sm-2 control-label">CEP:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="cep" data-ng-model="clienteAlterar.cep" required />
+                                <input type="text" class="form-control" id="cep" data-ng-model="model.cep" ng-blur="BuscarCep()" required />
+                            </div>
+                            <label for="endereco" class="col-sm-2 control-label">Endereço:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="endereco" data-ng-model="model.endereco" required />
+                            </div>
+                            <label for="bairro" class="col-sm-2 control-label">Bairro:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="bairro" data-ng-model="model.bairro" required />
+                            </div>
+                            <label for="cidade" class="col-sm-2 control-label">Cidade:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="cidade" data-ng-model="model.cidade" required />
                             </div>
                             <label for="email" class="col-sm-2 control-label">Email:</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="email" data-ng-model="clienteAlterar.email" required />
+                                <input type="email" class="form-control" id="email" data-ng-model="model.email" required />
                             </div>
                             <label for="telefone" class="col-sm-2 control-label">Telefone:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="telefone" data-ng-model="clienteAlterar.telefone" required />
+                                <input type="text" class="form-control" id="telefone" data-ng-model="model.telefone" required />
                             </div>
                             <label for="status" class="col-sm-2 control-label">Status:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="status_cliente" data-ng-model="clienteAlterar.status_cliente" required />
+                                <input type="text" class="form-control" id="status_cliente" data-ng-model="model.status_cliente" required />
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">

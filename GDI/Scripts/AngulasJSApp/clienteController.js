@@ -11,8 +11,23 @@ function clienteController($scope, $http) {
     $scope.ocultaTabelaListagemClientes = false;
     $scope.exibeformAlterarCliente = false;
 
+    $scope.BuscarCep = function () {        
+        $http({
+            method: "GET",
+            url: "http://cep.republicavirtual.com.br/web_cep.php?cep= " + $scope.model.cep + "&formato=json"
+        }).then(function successCallback(response) {            
+            if (response.resultado_txt = 'sucesso - cep completo') {
+                $scope.model.endereco = response.data.tipo_logradouro + ' ' + response.data.logradouro;
+                $scope.model.cidade = response.data.uf;
+                $scope.model.bairro = response.data.bairro;
+            }                
+        }, function errorCallback(response) {                        
+        });
+    };
+
     //Função para exibir o form para cadastro do novo cliente
     $scope.funcformNovoCliente = function () {
+        $scope.model = null; // Limpar Campos 
         $scope.exibeformNovoCliente = true;
         $scope.ocultaTabelaListagemClientes = true;
     };
@@ -26,13 +41,13 @@ function clienteController($scope, $http) {
     //Cadastrar cliente
     $scope.cadastrarCliente = function () {
         var dataAtual = new Date();
-        this.novocliente.data_cadastro = dataAtual;
-        $http.post('http://localhost:61017/api/Clientes/Postcliente/', this.novocliente).success(function (data) {
+        this.model.data_cadastro = dataAtual;
+        $http.post('http://localhost:61017/api/Clientes/Postcliente/', this.model).success(function (data) {                        
             alert("Cliente cadastrado com sucesso.");
             $scope.exibeformNovoCliente = false;
             $scope.ocultaTabelaListagemClientes = false;
             $scope.clientes.push(data);
-            $scope.novocliente = null;
+            $scope.model = null;            
         }).error(function (data) {
             $scope.error = "Erro ao cadastrar o cliente! " + data;
         });
@@ -48,7 +63,7 @@ function clienteController($scope, $http) {
 
     //Função para exibir o form para cadastro do novo cliente
     $scope.funcformEditarCliente = function () {
-        $scope.clienteAlterar = this.cliente;
+        $scope.model = this.cliente;
         $scope.exibeformNovoCliente = false;
         $scope.ocultaTabelaListagemClientes = true;
         $scope.exibeformAlterarCliente = true;
@@ -63,7 +78,7 @@ function clienteController($scope, $http) {
 
     //Editar cliente
     $scope.editarCliente = function () {
-        var cli = this.clienteAlterar;
+        var cli = this.model;
         $http.put('http://localhost:61017/api/Clientes/Putcliente/' + cli.idcliente, cli).success(function (data) {
             alert("Cliente alterado com sucesso.");
             $scope.exibeformNovoCliente = false;

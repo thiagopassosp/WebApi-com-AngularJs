@@ -30,9 +30,10 @@ namespace GDI {
                       "~/Scripts/angular.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/angularjsControllers").Include(
-                     "~/Scripts/AngularJSApp/clienteController.js",
-                     "~/Scripts/AngularJSApp/produtoController.js",
-                    "~/Scripts/AngularJSApp/pedidoCabecalhoController.js"));
+                     "~/Scripts/AngulasJSApp/clienteController.js",
+                     "~/Scripts/AngulasJSApp/produtoController.js",
+                    "~/Scripts/AngulasJSApp/pedidoCabecalhoController.js"));
+                    
         }
     }
 }
