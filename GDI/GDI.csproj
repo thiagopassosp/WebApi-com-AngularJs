@@ -158,6 +158,7 @@
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PedidoCabecalhoController.cs" />
+    <Compile Include="Controllers\PedidosCabecalhoController.cs" />
     <Compile Include="Controllers\PedidoItensController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Controllers\ProdutosController.cs" />
@@ -259,6 +260,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="Scripts\AngulasJSApp\clienteController.js" />
+    <Content Include="Scripts\AngulasJSApp\pedidoCabecalhoController.js" />
     <Content Include="Scripts\AngulasJSApp\produtoController.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

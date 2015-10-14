@@ -9,32 +9,57 @@
                     <div class="table-responsive" data-ng-hide="ocultaTabelaListagempedidoCabecalhos">
                         <!--<p><a data-ng-click="funcformNovopedidoCabecalho()" class="btn btn-primary">Novo pedidoCabecalho</a></p>-->
                         <table class="table table-bordered table-hover">
+
                             <tr>
-                                <td>Id Pedido</td>
+
+                                <th>Id Pedido</th>
+
                                 <th>Id Cliente</th>
+
                                 <th>Nome cliente</th>
+
                                 <th>Valor total pedido</th>
+
                                 <th>Qtde itens</th>
+
                                 <th>Status</th>
+
                                 <th>Data pedido</th>
+
                                 <th></th>
+
                             </tr>
+
                             <tr data-ng-repeat="pedidoCabecalho in pedidoCabecalhos">
+
                                 <td>{{ pedidoCabecalho.idpedido_cabecalho }}</td>
+
                                 <td>{{ pedidoCabecalho.idcliente }}</td>
+
                                 <td>{{ pedidoCabecalho.cliente.nome }}</td>
+
                                 <td>{{ pedidoCabecalho.valor_total_pedido }}</td>
+
                                 <td>{{ pedidoCabecalho.qtde_itens }}</td>
+
                                 <td>{{ pedidoCabecalho.status_pedido }}</td>
+
                                 <td>{{ pedidoCabecalho.data_pedido }}</td>
+
                                 <td>
                                     <a data-ng-click="funcformEditarpedidoCabecalho(pedidoCabecalho)" href="javascript:;">Editar</a>
                                     | <a data-ng-click="deletarpedidoCabecalho(pedidoCabecalho)" href="javascript:;">Deletar</a>
+
                                 </td>
+
                             </tr>
+
                         </table>
+
                     </div><!--fim div class="table-responsive"-->
+
                 </div>
+
             </div><!--fim row table listagem de pedidoCabecalhos-->
             <div class="row">
                 <!--row form alterarpedidoCabecalho-->
@@ -43,41 +68,56 @@
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <label for="alterar" class="col-sm-12 control-label col-md-offset-1">:::ALTERAR STATUS PEDIDO:::</label>
+
                             </div>
                             <label for="idpedido_cabecalho" class="col-sm-2 control-label">Id pedido:</label>
                             <div class="col-sm-10">
                                 <input type="number" class="form-control" id="idpedido_cabecalho" data-ng-model="pedidoCabecalhoAlterar.idpedido_cabecalho" required disabled />
+
                             </div>
                             <label for="idcliente" class="col-sm-2 control-label">Id cliente:</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="idcliente" data-ng-model="pedidoCabecalhoAlterar.idcliente" required disabled />
+
                             </div>
                             <label for="cliente.nome" class="col-sm-2 control-label">Nome cliente:</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="cliente.nome" data-ng-model="pedidoCabecalhoAlterar.cliente.nome" required disabled />
+
                             </div>
                             <label for="valor_total_pedido" class="col-sm-2 control-label">Valor total pedido:</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="valor_total_pedido" data-ng-model="pedidoCabecalhoAlterar.valor_total_pedido" required disabled />
+
                             </div>
                             <label for="qtde_itens" class="col-sm-2 control-label">Qdte Itens:</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="qtde_itens" data-ng-model="pedidoCabecalhoAlterar.qtde_itens" required disabled />
+
                             </div>
                             <label for="status_pedido" class="col-sm-2 control-label">Status:</label>
                             <div class="col-sm-10">
                                 <select data-ng-model="pedidoCabecalhoAlterar.status_pedido" class="form-control">
+
                                     <option value="{{ pedidoCabecalho.status_pedido }}">{{ pedidoCabecalho.status_pedido }}</option>
+
                                     <option value="cancelado">cancelado</option>
+
                                     <option value="em aberto">em aberto</option>
+
                                     <option value="bloqueado">bloqueado</option>
+
                                     <option value="entregue">entregue</option>
+
                                     <option value="em transito">em transito</option>
+
                                 </select>
+
                             </div>
                             <label for="data_pedido" class="col-sm-2 control-label">Data Cadastro:</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="data_pedido" data-ng-model="pedidoCabecalhoAlterar.data_pedido" required disabled />
+
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
@@ -91,4 +131,5 @@
             </div><!-- fim row form alterarpedidoCabecalho-->
         </div><!--class="panel-body"-->
     </div><!--Fim class="panel panel-default"-->
+
 </div><!--Fim data-ng-controller="pedidoCabecalhoController"-->
