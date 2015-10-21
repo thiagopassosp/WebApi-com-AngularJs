@@ -1,6 +1,7 @@
 ﻿//Cria o controller pedido cabeçalho
 app.controller('pedidoCabecalhoController', ['$scope', '$http', pedidoCabecalhoController]);
 
+
 //Método para o controller pedido cabeçalho
 function pedidoCabecalhoController($scope, $http) {
 
@@ -9,7 +10,7 @@ function pedidoCabecalhoController($scope, $http) {
     $scope.exibeformAlterarpedidoCabecalho = false;
 
     //Buscar listagem de pedido cabeçalho
-    $http.get('http://localhost/ForcaVendaWebAPI/api/PedidoCabecalho/Getpedido_cabecalho/').success(function (data) {
+    $http.get('http://localhost:61017/api/PedidosCabecalho/').success(function (data) {
         $scope.pedidoCabecalhos = data;
     })
     .error(function () {
@@ -32,7 +33,7 @@ function pedidoCabecalhoController($scope, $http) {
     //Editar o status do pedido cabeçalho
     $scope.editarpedidoCabecalho = function () {
         var ped = this.pedidoCabecalhoAlterar;
-        $http.put('http://localhost/ForcaVendaWebAPI/api/PedidoCabecalho/Putpedido_cabecalho/' + ped.idpedido_cabecalho, ped).success(function (data) {
+        $http.put('http://localhost:61017/api/PedidosCabecalho/' + ped.idpedido_cabecalho, ped).success(function (data) {
             alert("Pedido alterado com sucesso.");
             $scope.ocultaTabelaListagempedidoCabecalhos = false;
             $scope.exibeformAlterarpedidoCabecalho = false;
@@ -44,7 +45,7 @@ function pedidoCabecalhoController($scope, $http) {
     //Deletar pedido
     $scope.deletarpedidoCabecalho = function () {
         var id = this.pedidoCabecalho.idpedido_cabecalho;
-        $http.delete('http://localhost/ForcaVendaWebAPI/api/PedidoCabecalho/Deletepedido_cabecalho/' + id).success(function (data) {
+        $http.delete('http://localhost:61017/api/PedidosCabecalho/' + id).success(function (data) {
             alert("Pedido deletado com sucesso.");
             $.each($scope.pedidoCabecalhos, function (i) {
                 if ($scope.pedidoCabecalhos[i].idpedidoCabecalho === id) {

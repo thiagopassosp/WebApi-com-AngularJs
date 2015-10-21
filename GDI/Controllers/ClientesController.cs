@@ -14,7 +14,7 @@ namespace GDI.Controllers {
         private BancoDadosEntities db = new BancoDadosEntities();
 
         // GET: api/Clientes
-        public IQueryable<cliente> Getcliente() {
+        public IQueryable<cliente> Get() {
             return db.cliente;
         }
 

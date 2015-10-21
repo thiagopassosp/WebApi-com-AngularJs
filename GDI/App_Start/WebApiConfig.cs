@@ -17,16 +17,16 @@ namespace GDI {
             config.Formatters.Remove(config.Formatters.XmlFormatter);
 
 
-            //config.Routes.MapHttpRoute(
-            //    name: "ActionApi",
-            //    routeTemplate: "api/{controller}/{id}",
-            //    defaults: new { id = RouteParameter.Optional }
-            //);
             config.Routes.MapHttpRoute(
-              name: "DefaultApi",
-              routeTemplate: "api/{controller}/{Action}/{id}",
-              defaults: new { id = RouteParameter.Optional }
-          );
+                name: "ActionApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+          //  config.Routes.MapHttpRoute(
+          //    name: "DefaultApi",
+          //    routeTemplate: "api/{controller}/{Action}/{id}",
+          //    defaults: new { id = RouteParameter.Optional }
+          //);
         }
     }
 }

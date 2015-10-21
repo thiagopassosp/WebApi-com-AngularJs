@@ -25,7 +25,7 @@
     $scope.cadastrarProduto = function () {
         var dataAtual = new Date();
         this.novoproduto.data_cadastro = dataAtual;
-        $http.post('http://localhost:61017/api/Produtos/Postproduto/', this.novoproduto).success(function (data) {
+        $http.post('http://localhost:61017/api/Produtos/', this.novoproduto).success(function (data) {
             alert("Produto cadastrado com sucesso.");
             $scope.exibeformNovoProduto = false;
             $scope.ocultaTabelaListagemProdutos = false;
@@ -37,7 +37,7 @@
     };
 
     //Buscar listagem de produtos
-    $http.get('http://localhost:61017/api/Produtos/Getproduto/').success(function (data) {
+    $http.get('http://localhost:61017/api/Produtos/').success(function (data) {
         $scope.produtos = data;
     })
     .error(function () {
@@ -62,7 +62,7 @@
     //Editar produto
     $scope.editarProduto = function () {
         var prod = this.produtoAlterar;
-        $http.put('http://localhost:61017/api/Produtos/Putproduto/' + prod.idproduto, prod).success(function (data) {
+        $http.put('http://localhost:61017/api/Produtos/' + prod.idproduto, prod).success(function (data) {
             alert("Produto alterado com sucesso.");
             $scope.exibeformNovoProduto = false;
             $scope.ocultaTabelaListagemProdutos = false;
@@ -75,7 +75,7 @@
     //Deletar produto
     $scope.deletarProduto = function () {
         var id = this.produto.idproduto;
-        $http.delete('http://localhost:61017/api/Produtos/Deleteproduto/' + id).success(function (data) {
+        $http.delete('http://localhost:61017/api/Produtos/' + id).success(function (data) {
             alert("Produto deletado com sucesso.");
             $.each($scope.produtos, function (i) {
                 if ($scope.produtos[i].idproduto === id) {

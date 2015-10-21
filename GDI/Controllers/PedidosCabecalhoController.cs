@@ -7,18 +7,20 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using GDI.Models;
+
 namespace GDI.Controllers {
     public class PedidosCabecalhoController : ApiController {
+
         private BancoDadosEntities db = new BancoDadosEntities();
 
         // GET: api/PedidoCabecalho
-        public IQueryable<pedido_cabecalho> Getpedido_cabecalho() {
+        public IQueryable<pedido_cabecalho> Get() {
             return db.pedido_cabecalho;
         }
 
         // GET: api/PedidoCabecalho/5
         [ResponseType(typeof(pedido_cabecalho))]
-        public async Task<IHttpActionResult> Getpedido_cabecalho(int id) {
+        public async Task<IHttpActionResult> Get(int id) {
             pedido_cabecalho pedido_cabecalho = await db.pedido_cabecalho.FindAsync(id);
             if (pedido_cabecalho == null) {
                 return NotFound();
@@ -29,7 +31,7 @@ namespace GDI.Controllers {
 
         // PUT: api/PedidoCabecalho/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> Putpedido_cabecalho(int id, pedido_cabecalho pedido_cabecalho) {
+        public async Task<IHttpActionResult> Put(int id, pedido_cabecalho pedido_cabecalho) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
@@ -55,7 +57,7 @@ namespace GDI.Controllers {
 
         // POST: api/PedidoCabecalho
         [ResponseType(typeof(pedido_cabecalho))]
-        public async Task<IHttpActionResult> Postpedido_cabecalho(pedido_cabecalho pedido_cabecalho) {
+        public async Task<IHttpActionResult> Post(pedido_cabecalho pedido_cabecalho) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
@@ -68,7 +70,7 @@ namespace GDI.Controllers {
 
         // DELETE: api/PedidoCabecalho/5
         [ResponseType(typeof(pedido_cabecalho))]
-        public async Task<IHttpActionResult> Deletepedido_cabecalho(int id) {
+        public async Task<IHttpActionResult> Delete(int id) {
             pedido_cabecalho pedido_cabecalho = await db.pedido_cabecalho.FindAsync(id);
             if (pedido_cabecalho == null) {
                 return NotFound();

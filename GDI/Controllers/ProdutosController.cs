@@ -17,13 +17,13 @@ namespace GDI.Controllers {
         private BancoDadosEntities db = new BancoDadosEntities();
 
         // GET: api/Produtos
-        public IQueryable<produto> Getproduto() {
+        public IQueryable<produto> Get() {
             return db.produto;
         }
 
         // GET: api/Produtos/5
         [ResponseType(typeof(produto))]
-        public async Task<IHttpActionResult> Getproduto(int id) {
+        public async Task<IHttpActionResult> Get(int id) {
             produto produto = await db.produto.FindAsync(id);
             if (produto == null) {
                 return NotFound();
@@ -33,7 +33,7 @@ namespace GDI.Controllers {
 
         // PUT: api/Produtos/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> Putproduto(int id, produto produto) {
+        public async Task<IHttpActionResult> Put(int id, produto produto) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
@@ -58,7 +58,7 @@ namespace GDI.Controllers {
 
         // POST: api/Produtos
         [ResponseType(typeof(produto))]
-        public async Task<IHttpActionResult> Postproduto(produto produto) {
+        public async Task<IHttpActionResult> Post(produto produto) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
@@ -70,7 +70,7 @@ namespace GDI.Controllers {
 
         // DELETE: api/Produtos/5
         [ResponseType(typeof(produto))]
-        public async Task<IHttpActionResult> Deleteproduto(int id) {
+        public async Task<IHttpActionResult> Delete(int id) {
             produto produto = await db.produto.FindAsync(id);
             if (produto == null) {
                 return NotFound();

@@ -1,4 +1,4 @@
-﻿@{ ViewBag.Title = "Clientes"; }
+﻿@{ ViewBag.Title = "Clientes VIP"; }
 <div data-ng-controller="clienteController">
     <div class="panel panel-default">
         <div class="panel-heading">Controle de clientes 2015 14/10</div>
@@ -24,7 +24,7 @@
 
                             <label for="cep" class="col-sm-2 control-label">CEP:</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" id="cep" data-ng-model="model.cep" required />
+                                <input type="number" class="form-control" id="cep" data-ng-model="model.cep" ng-blur="BuscarCep()" required />
                             </div>
 
                             <label for="endereco" class="col-sm-2 control-label">Endereço:</label>

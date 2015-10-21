@@ -1,4 +1,4 @@
-﻿@{ ViewBag.Title = "pedidoCabecalhos"; }
+﻿@{ ViewBag.Title = "Pedidos"; }
 <div data-ng-controller="pedidoCabecalhoController">
     <div class="panel panel-default">
         <div class="panel-heading">Controle de Pedidos</div>
@@ -44,7 +44,7 @@
 
                                 <td>{{ pedidoCabecalho.status_pedido }}</td>
 
-                                <td>{{ pedidoCabecalho.data_pedido }}</td>
+                                <td>{{ pedidoCabecalho.data_pedido | date:'dd/MM/yyyy' }}</td>
 
                                 <td>
                                     <a data-ng-click="funcformEditarpedidoCabecalho(pedidoCabecalho)" href="javascript:;">Editar</a>
@@ -101,15 +101,15 @@
 
                                     <option value="{{ pedidoCabecalho.status_pedido }}">{{ pedidoCabecalho.status_pedido }}</option>
 
-                                    <option value="cancelado">cancelado</option>
+                                    <option value="cancelado">Cancelado</option>
 
-                                    <option value="em aberto">em aberto</option>
+                                    <option value="em aberto">Em aberto</option>
 
-                                    <option value="bloqueado">bloqueado</option>
+                                    <option value="bloqueado">Bloqueado</option>
 
-                                    <option value="entregue">entregue</option>
+                                    <option value="entregue">Entregue</option>
 
-                                    <option value="em transito">em transito</option>
+                                    <option value="em transito">Em Transito</option>
 
                                 </select>
 

@@ -54,7 +54,7 @@ function clienteController($scope, $http) {
     };
 
     //Buscar listagem de clientes
-    $http.get('http://localhost:61017/api/Clientes/Getcliente/').success(function (data) {
+    $http.get('http://localhost:61017/api/Clientes/').success(function (data) {
         $scope.clientes = data;
     })
     .error(function () {
