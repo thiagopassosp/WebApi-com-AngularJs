@@ -11,17 +11,17 @@ function clienteController($scope, $http) {
     $scope.ocultaTabelaListagemClientes = false;
     $scope.exibeformAlterarCliente = false;
 
-    $scope.BuscarCep = function () {        
+    $scope.BuscarCep = function () {
         $http({
             method: "GET",
             url: "http://cep.republicavirtual.com.br/web_cep.php?cep= " + $scope.model.cep + "&formato=json"
-        }).then(function successCallback(response) {            
+        }).then(function successCallback(response) {
             if (response.resultado_txt = 'sucesso - cep completo') {
                 $scope.model.endereco = response.data.tipo_logradouro + ' ' + response.data.logradouro;
                 $scope.model.cidade = response.data.uf;
                 $scope.model.bairro = response.data.bairro;
-            }                
-        }, function errorCallback(response) {                        
+            }
+        }, function errorCallback(response) {            
         });
     };
 
@@ -42,12 +42,12 @@ function clienteController($scope, $http) {
     $scope.cadastrarCliente = function () {
         var dataAtual = new Date();
         this.model.data_cadastro = dataAtual;
-        $http.post('http://localhost:61017/api/Clientes/Postcliente/', this.model).success(function (data) {                        
+        $http.post('http://localhost:61017/api/Clientes/', this.model).success(function (data) {
             alert("Cliente cadastrado com sucesso.");
             $scope.exibeformNovoCliente = false;
             $scope.ocultaTabelaListagemClientes = false;
             $scope.clientes.push(data);
-            $scope.model = null;            
+            $scope.model = null;
         }).error(function (data) {
             $scope.error = "Erro ao cadastrar o cliente! " + data;
         });
@@ -79,7 +79,7 @@ function clienteController($scope, $http) {
     //Editar cliente
     $scope.editarCliente = function () {
         var cli = this.model;
-        $http.put('http://localhost:61017/api/Clientes/Putcliente/' + cli.idcliente, cli).success(function (data) {
+        $http.put('http://localhost:61017/api/Clientes/' + cli.idcliente, cli).success(function (data) {
             alert("Cliente alterado com sucesso.");
             $scope.exibeformNovoCliente = false;
             $scope.ocultaTabelaListagemClientes = false;

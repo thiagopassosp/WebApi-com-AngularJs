@@ -20,7 +20,7 @@ namespace GDI.Controllers {
 
         // GET: api/Clientes/5
         [ResponseType(typeof(cliente))]
-        public async Task<IHttpActionResult> Getcliente(int id) {
+        public async Task<IHttpActionResult> Get(int id) {
             cliente cliente = await db.cliente.FindAsync(id);
             if (cliente == null) {
                 return NotFound();
@@ -30,7 +30,7 @@ namespace GDI.Controllers {
 
         // PUT: api/Clientes/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> Putcliente(int id, cliente cliente) {
+        public async Task<IHttpActionResult> Put(int id, cliente cliente) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
@@ -56,7 +56,7 @@ namespace GDI.Controllers {
 
         // POST: api/Clientes
         [ResponseType(typeof(cliente))]
-        public async Task<IHttpActionResult> Postcliente(cliente cliente) {
+        public async Task<IHttpActionResult> Post(cliente cliente) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
@@ -69,7 +69,7 @@ namespace GDI.Controllers {
 
         // DELETE: api/Clientes/5
         [ResponseType(typeof(cliente))]
-        public async Task<IHttpActionResult> Deletecliente(int id) {
+        public async Task<IHttpActionResult> Delete(int id) {
             cliente cliente = await db.cliente.FindAsync(id);
             if (cliente == null) {
                 return NotFound();

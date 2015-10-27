@@ -7,7 +7,9 @@
     //Declaração de variáveis
     $scope.exibeformNovoProduto = false;
     $scope.ocultaTabelaListagemProdutos = false;
-    $scope.exibeformAlterarProduto = false;
+    //$scope.exibeformAlterarProduto = false;
+    HabilitarPainelAlteracao(false);
+     
 
     //Função para exibir o form para cadastro do novo produto
     $scope.funcformNovoProduto = function () {
@@ -49,14 +51,16 @@
         $scope.produtoAlterar = this.produto;
         $scope.exibeformNovoProduto = false;
         $scope.ocultaTabelaListagemProdutos = true;
-        $scope.exibeformAlterarProduto = true;
+        //$scope.exibeformAlterarProduto = true;        
+        HabilitarPainelAlteracao(true);
     };
 
     //Ocultar o form de novo produto e exibir a listagem
     $scope.funcCancelarEdicao = function () {
         $scope.exibeformNovoProduto = false;
         $scope.ocultaTabelaListagemProdutos = false;
-        $scope.exibeformAlterarProduto = false;
+        //$scope.exibeformAlterarProduto = false;
+        HabilitarPainelAlteracao(false);
     };
 
     //Editar produto
@@ -66,7 +70,8 @@
             alert("Produto alterado com sucesso.");
             $scope.exibeformNovoProduto = false;
             $scope.ocultaTabelaListagemProdutos = false;
-            $scope.exibeformAlterarProduto = false;
+            //$scope.exibeformAlterarProduto = false;            
+            HabilitarPainelAlteracao(false);
         }).error(function (data) {
             $scope.error = "Erro ao alterar o produto! " + data;
         });
@@ -87,4 +92,14 @@
             $scope.error = "Erro ao deletar o produto." + data;
         });
     };
+ }
+
+ function HabilitarPainelAlteracao(flag) {
+     if (flag){
+         $('[name=alterarproduto]').attr("class", "visible");
+     }
+     else{
+         $('[name=alterarproduto]').attr("class", "invisible");
+     }
+
  }
